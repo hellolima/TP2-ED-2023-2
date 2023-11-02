@@ -3,12 +3,20 @@
 #ifndef LISTA_ENCADEADA_HPP
 #define LISTA_ENCADEADA_HPP
 
+
 template <class TipoDado> 
 struct No
 {
     TipoDado dado;
     No* proximo;
     No* anterior;
+
+    // void inverterNos(No<TipoDado>* no1, No<TipoDado>* no2){
+    //     TipoDado aux = no1->dado;
+
+    //     no1->dado= no2->dado;
+    //     no2->dado=aux;
+    // }
 };
 
 template <class TipoDado> 
@@ -46,58 +54,63 @@ class ListaEncadeada
         }
 
         void Inserir(TipoDado dado)
-        {
-            auto novoNo = new No<TipoDado>;
-            novoNo->dado = dado;
+{
+    auto novoNo = new No<TipoDado>;
+    novoNo->dado = dado;
+    novoNo->proximo = nullptr;
+    novoNo->anterior = _cauda;
 
-            novoNo->proximo = nullptr;
-            novoNo->anterior = _cauda;
+    if (_cabeca == nullptr)
+    {
+        _cabeca = novoNo;
+        _cauda = novoNo;
+    }
+    else
+    {
+        _cauda->proximo = novoNo;
+        novoNo->anterior = _cauda;
+        _cauda = novoNo;
+    }
 
-            if (_cabeca == nullptr)
-            {
-                _cabeca = novoNo;
-                _cauda = novoNo;
-            }
-            else
-            {
-                _cauda->proximo = novoNo;
-                _cauda = novoNo;
-            }
+    _tamanho++;
+}
 
-            _tamanho++;
-        }
 
         void Remover(TipoDado dado)
+{
+    auto atual = _cabeca;
+
+    while (atual != nullptr)
+    {
+        if (atual->dado == dado)
         {
-            auto atual = _cabeca;
-
-            while (atual != nullptr)
+            if (atual->anterior != nullptr)
             {
-                if (atual->dado == dado)
-                {
-                    if (atual->anterior == nullptr)
-                    {
-                        _cabeca = atual->proximo;
-                    }
-                    else
-                    {
-                        atual->anterior->proximo = atual->proximo;
-
-                        if (atual->proximo != nullptr)
-                            atual->proximo->anterior = atual->anterior;
-
-                        if (atual->proximo == nullptr)
-                            _cauda = atual->anterior;
-                    }
-
-                    delete atual;
-                    _tamanho--;
-                    return;
-                }
-
-                atual = atual->proximo;
+                atual->anterior->proximo = atual->proximo;
             }
+            if (atual->proximo != nullptr)
+            {
+                atual->proximo->anterior = atual->anterior;
+            }
+
+            if (atual == _cabeca)
+            {
+                _cabeca = atual->proximo;
+            }
+            if (atual == _cauda)
+            {
+                _cauda = atual->anterior;
+            }
+
+            delete atual;
+            _tamanho--;
+            return;
         }
+
+        atual = atual->proximo;
+    }
+}
+
 
         TipoDado Obter(int indice)
         {
@@ -117,6 +130,6 @@ class ListaEncadeada
         }
 };
 
-using ListaAdjacencia =  ListaEncadeada<ListaEncadeada<int>*>*;
+// using ListaAdjacencia =  ListaEncadeada<Vertice*>*;
 
 #endif

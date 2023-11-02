@@ -1,37 +1,69 @@
 #include <iostream>
+#include <vector>
+#include <algorithm> // Para a função std::sort
 #include "Grafo.hpp"
 
 #define SUCCESSO (0)
 #define FALHA (1)
 
-int main(int argc, char const *argv[]){
-    std::string funcao(argv[1]);
-    std::string vertices(argv[1]);
+int main(int argc, char const *argv[]) {
 
-    int numVertices = std::stoi(vertices); //error
-
-    std::cout << funcao << std::endl;
-    
-    //criar um grafo
+    char metodoOrdenacao;
+    int numVertices;
     int numArestas;
+    int corVertice;
+
+    std::cin >> metodoOrdenacao;
+    std::cin >> numVertices;
+
 
     Grafo grafo;
 
-    for(int i = 0; i < numVertices; i++)
-        grafo.InsereVertice();
+    for (int i = 0; i < numVertices; i++){
+        grafo.InsereVertice(i);
+    }
         
-    for(int i = 0; i < numVertices; i++)
-    {
+    
+    for (int i = 0; i < numVertices; i++) {
+        
         std::cin >> numArestas;
 
-        for(int j = 0; j < numArestas; j++)
-        {
+        for (int j = 0; j < numArestas; j++) {
             int v;
             std::cin >> v;
             grafo.InsereAresta(i, v);
         }
     }
 
+    for (int i = 0; i < numVertices; i++){
+        std::cin >> corVertice;
+        ListaEncadeada<Vertice*>* vertices = grafo.ObterVertices();
+        Vertice* verticeAtual = vertices->Obter(i);
+        verticeAtual->setCor(corVertice);
+    }
 
-    return FALHA;
+
+    // Lógica de ordenação
+    if (metodoOrdenacao == 'b') {
+        std::cout << "Entrou aqui" << std::endl;
+    } else if (metodoOrdenacao == 's') {
+        std::cout << "Entrou aqui" << std::endl;
+    } else if (metodoOrdenacao == 'i') {
+        std::cout << "Entrou aqui" << std::endl;
+    } else if (metodoOrdenacao == 'q') {
+        std::cout << "Entrou aqui" << std::endl;
+    } else if (metodoOrdenacao == 'm') {
+       std::cout << "Entrou aqui" << std::endl;
+    } else if (metodoOrdenacao == 'p') {
+        std::cout << "Entrou aqui" << std::endl;
+    } else if (metodoOrdenacao == 'y') {
+        grafo.ImprimirGrafo();
+    } else {
+        std::cerr << "Método de ordenação inválido." << std::endl;
+        return FALHA;
+    }
+
+
+
+    return SUCCESSO;
 }

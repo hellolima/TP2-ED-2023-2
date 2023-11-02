@@ -2,6 +2,7 @@
 #define GRAFO_HPP
 
 #include "ListaEncadeada.hpp"
+#include "Vertice.hpp"
 
 class Grafo
 {
@@ -9,14 +10,18 @@ class Grafo
         Grafo();
         ~Grafo();
 
-        void InsereVertice();
-        void InsereAresta(int v, int w);
+        void InsereVertice(int id);
+        void InsereAresta(int idV, int idW);
 
         int QuantidadeVertices();
         int QuantidadeArestas();
         
+        ListaEncadeada<Vertice*>* ObterVertices();
+
+        void ImprimirGrafo();
+
     private:
-        ListaAdjacencia vertices;
+        ListaEncadeada<Vertice*>* vertices;
 };
 
 #endif
