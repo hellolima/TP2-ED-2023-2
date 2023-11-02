@@ -18,6 +18,7 @@ int main(int argc, char const *argv[]) {
 
 
     Grafo grafo;
+    ListaEncadeada<Vertice*>* vertices;
 
     for (int i = 0; i < numVertices; i++){
         grafo.InsereVertice(i);
@@ -37,7 +38,7 @@ int main(int argc, char const *argv[]) {
 
     for (int i = 0; i < numVertices; i++){
         std::cin >> corVertice;
-        ListaEncadeada<Vertice*>* vertices = grafo.ObterVertices();
+        vertices = grafo.ObterVertices();
         Vertice* verticeAtual = vertices->Obter(i);
         verticeAtual->setCor(corVertice);
     }
@@ -53,7 +54,9 @@ int main(int argc, char const *argv[]) {
     } else if (metodoOrdenacao == 'q') {
         std::cout << "Entrou aqui" << std::endl;
     } else if (metodoOrdenacao == 'm') {
-       std::cout << "Entrou aqui" << std::endl;
+      grafo.ImprimirGrafo();
+      vertices->inverterItens(0, 5);
+      grafo.ImprimirGrafo();
     } else if (metodoOrdenacao == 'p') {
         std::cout << "Entrou aqui" << std::endl;
     } else if (metodoOrdenacao == 'y') {
@@ -62,7 +65,6 @@ int main(int argc, char const *argv[]) {
         std::cerr << "Método de ordenação inválido." << std::endl;
         return FALHA;
     }
-
 
 
     return SUCCESSO;

@@ -11,12 +11,7 @@ struct No
     No* proximo;
     No* anterior;
 
-    // void inverterNos(No<TipoDado>* no1, No<TipoDado>* no2){
-    //     TipoDado aux = no1->dado;
-
-    //     no1->dado= no2->dado;
-    //     no2->dado=aux;
-    // }
+    
 };
 
 template <class TipoDado> 
@@ -53,27 +48,26 @@ class ListaEncadeada
             return _tamanho;
         }
 
-        void Inserir(TipoDado dado)
-{
-    auto novoNo = new No<TipoDado>;
-    novoNo->dado = dado;
-    novoNo->proximo = nullptr;
-    novoNo->anterior = _cauda;
+        void Inserir(TipoDado dado){
+            auto novoNo = new No<TipoDado>;
+            novoNo->dado = dado;
+            novoNo->proximo = nullptr;
+            novoNo->anterior = _cauda;
 
-    if (_cabeca == nullptr)
-    {
-        _cabeca = novoNo;
-        _cauda = novoNo;
-    }
-    else
-    {
-        _cauda->proximo = novoNo;
-        novoNo->anterior = _cauda;
-        _cauda = novoNo;
-    }
+            if (_cabeca == nullptr)
+            {
+                _cabeca = novoNo;
+                _cauda = novoNo;
+            }
+            else
+            {
+                _cauda->proximo = novoNo;
+                novoNo->anterior = _cauda;
+                _cauda = novoNo;
+            }
 
-    _tamanho++;
-}
+            _tamanho++;
+        }
 
 
         void Remover(TipoDado dado)
@@ -112,12 +106,10 @@ class ListaEncadeada
 }
 
 
-        TipoDado Obter(int indice)
-        {
+        TipoDado Obter(int indice){
             auto atual = _cabeca;
 
-            for (int i = 0; i < indice; i++)
-            {
+            for (int i = 0; i < indice; i++){
                 atual = atual->proximo;
             }
 
@@ -128,8 +120,38 @@ class ListaEncadeada
         {
             return _tamanho == 0;
         }
-};
 
-// using ListaAdjacencia =  ListaEncadeada<Vertice*>*;
+        void inverterItens(int indice1, int indice2) {
+            // if (indice1 < 0 || indice2 < 0 || indice1 >= _tamanho || indice2 >= _tamanho) {
+            //     std::cerr << "Índices inválidos." << std::endl;
+            //     return;
+            // }
+
+            // if (indice1 == indice2) {
+            //     // Não há necessidade de inverter se os índices forem iguais
+            //     return;
+            // }
+
+            // Encontrar os nós correspondentes aos índices
+            No<TipoDado>* no1 = _cabeca;
+            No<TipoDado>* no2 = _cabeca;
+
+            for (int i = 0; i < indice1; ++i) {
+                no1 = no1->proximo;
+            }
+
+            for (int i = 0; i < indice2; ++i) {
+                no2 = no2->proximo;
+            }
+
+            // Trocar os dados dos nós
+            TipoDado aux = no1->dado;
+            no1->dado = no2->dado;
+            no2->dado = aux;
+        }
+
+
+        
+};
 
 #endif
