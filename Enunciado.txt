@@ -5,7 +5,6 @@ de seus vértices e deve responder a seguinte pergunta: "É possível obter essa
 através de um algoritmo guloso?
 
 Colorações gulosas
-
 Existem várias formas de se definir uma coloração gulosa. Neste trabalho uma coloração
 é gulosa quando ela pode ser obtida através do seguinte algoritmo:
 
@@ -13,5 +12,32 @@ Existem várias formas de se definir uma coloração gulosa. Neste trabalho uma 
 vértices.
 2. Para cada vértice v da permutação P , tomado na ordem de P , atribua a ele a menor
 cor disponível. Uma cor c é dita disponível se c ∈ C e nenhum vizinho de v possui
-cor c. Caso não haja cor disponível, "crie"uma cor nova acrescentando mais uma
-cor a C e atribua a nova cor a
+cor c. Caso não haja cor disponível, "crie" uma cor nova acrescentando mais uma
+cor a C e atribua a nova cor a v.
+
+A coloração de um grafo é gulosa se, para cada vértice v de cor c, houver vizinhos de todas as cores menores que c.
+
+O que você deve implementar
+Entrada e saída
+As instancias serão lidas pela pela entrada padrão. Consistem na escolha do método de
+ordenação a ser utilizado e na leitura dos dados do grafo e da coloração. Essa leitura será
+feita da seguinte forma:
+• Primeira linha contendo um caractere c e um inteiro n, indicando respectivamente
+qual método de ordenação deve ser utilizado e a quantidade de vértices de G. Os
+valores que c pode receber são:
+– b: Método da bolha ou bubble sort.
+– s: Método da seleção ou selection sort.
+– i: Método da inserção ou insertion sort.
+– q: quicksort.
+– m: mergesort.
+– p: heapsort.
+– y: Seu próprio método de ordenação.
+• As próximas n linhas possuem a vizinhança de cada vértice. Cada uma começa
+com um inteiro m indicando quantos vizinhos o vértice possui seguido de m inteiros
+indicando seus vizinhos.
+• A última linha contém n inteiros indicando as cores de cada um dos vértices.
+Caso a coloração não seja uma coloração gulosa sua saída deve ser 0. Caso contrário,
+imprima 1 seguido da permutação dos vértices utilizada. Em caso de empate na classe de
+cor, os vértices devem ser ordenados pelo rótulo.
+
+//devo montar o grafo baseado no metodo de ordenacao escolhido?
