@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Grafo.hpp"
 #include "MetodosOrdenacao.hpp"
+#include "EhGuloso.hpp"
 
 #define SUCCESSO (0)
 #define FALHA (1)
@@ -43,6 +44,7 @@ int main(int argc, char const *argv[]) {
     }
 
     MetodosOrdenacao MetodosOrdenacao(&grafo);
+    EhGuloso EhGuloso(&grafo);
 
     // Lógica de ordenação
     if (metodoOrdenacao == 'b') {
@@ -54,6 +56,9 @@ int main(int argc, char const *argv[]) {
         MetodosOrdenacao.BubbleSort();
         grafo.ImprimirGrafo();
         std::cout << "_________" << std::endl;
+        std::cout << "É guloso?" << std::endl;
+        std::string resultado = EhGuloso.VerificarColoracao();
+        std::cout << resultado << std::endl;
 
 
 
@@ -66,6 +71,10 @@ int main(int argc, char const *argv[]) {
         MetodosOrdenacao.SelectionSort();
         grafo.ImprimirGrafo();
         std::cout << "_________" << std::endl;
+
+        std::cout << "É guloso?" << std::endl;
+        std::string resultado = EhGuloso.VerificarColoracao();
+        std::cout << resultado << std::endl;
 
 
 
