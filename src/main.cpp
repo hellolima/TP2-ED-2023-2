@@ -1,7 +1,6 @@
 #include <iostream>
-#include <vector>
-#include <algorithm> // Para a função std::sort
 #include "Grafo.hpp"
+#include "MetodosOrdenacao.hpp"
 
 #define SUCCESSO (0)
 #define FALHA (1)
@@ -43,10 +42,21 @@ int main(int argc, char const *argv[]) {
         verticeAtual->setCor(corVertice);
     }
 
+    MetodosOrdenacao MetodosOrdenacao(&grafo);
 
     // Lógica de ordenação
     if (metodoOrdenacao == 'b') {
-        std::cout << "Entrou aqui" << std::endl;
+        std::cout << "_________" << std::endl;
+        std::cout << "Bubble Sort" << std::endl;
+        grafo.ImprimirGrafo();
+        std::cout << "_________" << std::endl;
+        
+        MetodosOrdenacao.BubbleSort();
+        grafo.ImprimirGrafo();
+        std::cout << "_________" << std::endl;
+
+
+
     } else if (metodoOrdenacao == 's') {
         std::cout << "Entrou aqui" << std::endl;
     } else if (metodoOrdenacao == 'i') {
