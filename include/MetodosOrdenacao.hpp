@@ -13,7 +13,7 @@ class MetodosOrdenacao {
        ListaEncadeada<Vertice*>* vertices; 
        int quantidadeVertices;
 
-       void Merge(ListaEncadeada<Vertice*>* vertices, int esq, int meio, int dir);
+       
 
     public:
         MetodosOrdenacao(Grafo* grafo) : grafo(grafo), vertices(grafo->ObterVertices()), quantidadeVertices(grafo->QuantidadeVertices()) {}
@@ -21,7 +21,7 @@ class MetodosOrdenacao {
         void BubbleSort();
         void SelectionSort();
         void InserctionSort();
-        void MergeSort(ListaEncadeada<Vertice*>* vertices, int esq, int dir);
+        
 };
 
 #endif

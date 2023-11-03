@@ -101,18 +101,7 @@ int main(int argc, char const *argv[]) {
 
 
     } else if (metodoOrdenacao == 'm') {
-        std::cout << "_________" << std::endl;
-        std::cout << "Merge Sort" << std::endl;
-        grafo.ImprimirGrafo();
-        std::cout << "_________" << std::endl;
-        
-        MetodosOrdenacao.MergeSort(vertices, 0, numVertices - 1); // Chama o MergeSort diretamente
-        grafo.ImprimirGrafo();
-        std::cout << "_________" << std::endl;
-
-        std::cout << "É guloso?" << std::endl;
-        std::string resultado = EhGuloso.VerificarColoracao();
-        std::cout << resultado << std::endl;
+        std::cout << "Entrou aqui" << std::endl;
 
 
     } else if (metodoOrdenacao == 'p') {
