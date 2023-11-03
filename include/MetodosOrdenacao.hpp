@@ -16,8 +16,8 @@ class MetodosOrdenacao {
     public:
         MetodosOrdenacao(Grafo* grafo) : grafo(grafo), vertices(grafo->ObterVertices()), quantidadeVertices(grafo->QuantidadeVertices()) {}
 
-
         void BubbleSort();
+        void SelectionSort();
 
 };
 

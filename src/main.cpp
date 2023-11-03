@@ -58,7 +58,18 @@ int main(int argc, char const *argv[]) {
 
 
     } else if (metodoOrdenacao == 's') {
-        std::cout << "Entrou aqui" << std::endl;
+        std::cout << "_________" << std::endl;
+        std::cout << "Selection Sort" << std::endl;
+        grafo.ImprimirGrafo();
+        std::cout << "_________" << std::endl;
+        
+        MetodosOrdenacao.SelectionSort();
+        grafo.ImprimirGrafo();
+        std::cout << "_________" << std::endl;
+
+
+
+
     } else if (metodoOrdenacao == 'i') {
         std::cout << "Entrou aqui" << std::endl;
     } else if (metodoOrdenacao == 'q') {
