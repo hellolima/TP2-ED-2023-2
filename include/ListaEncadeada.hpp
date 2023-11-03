@@ -69,41 +69,57 @@ class ListaEncadeada
             _tamanho++;
         }
 
-
-        void Remover(TipoDado dado)
-{
-    auto atual = _cabeca;
-
-    while (atual != nullptr)
-    {
-        if (atual->dado == dado)
-        {
-            if (atual->anterior != nullptr)
-            {
-                atual->anterior->proximo = atual->proximo;
-            }
-            if (atual->proximo != nullptr)
-            {
-                atual->proximo->anterior = atual->anterior;
+        void RemoverNoInicio() {
+            if (_cabeca == nullptr) {
+                return;
             }
 
-            if (atual == _cabeca)
-            {
-                _cabeca = atual->proximo;
-            }
-            if (atual == _cauda)
-            {
-                _cauda = atual->anterior;
+            auto noRemovido = _cabeca;
+            _cabeca = _cabeca->proximo;
+
+            if (_cabeca != nullptr) {
+                _cabeca->anterior = nullptr;
+            } else {
+                _cauda = nullptr;
             }
 
-            delete atual;
+            delete noRemovido;
             _tamanho--;
-            return;
         }
 
-        atual = atual->proximo;
-    }
-}
+        void Remover(TipoDado dado){
+            auto atual = _cabeca;
+
+            while (atual != nullptr)
+            {
+                if (atual->dado == dado)
+                {
+                    if (atual->anterior != nullptr)
+                    {
+                        atual->anterior->proximo = atual->proximo;
+                    }
+                    if (atual->proximo != nullptr)
+                    {
+                        atual->proximo->anterior = atual->anterior;
+                    }
+
+                    if (atual == _cabeca)
+                    {
+                        _cabeca = atual->proximo;
+                    }
+                    if (atual == _cauda)
+                    {
+                        _cauda = atual->anterior;
+                    }
+
+                    delete atual;
+                    _tamanho--;
+                    return;
+                }
+
+                atual = atual->proximo;
+            }
+        }
 
 
         TipoDado Obter(int indice){
@@ -149,6 +165,9 @@ class ListaEncadeada
             no1->dado = no2->dado;
             no2->dado = aux;
         }
+
+
+        
 
 
         

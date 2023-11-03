@@ -80,15 +80,45 @@ int main(int argc, char const *argv[]) {
 
 
     } else if (metodoOrdenacao == 'i') {
-        std::cout << "Entrou aqui" << std::endl;
+        std::cout << "_________" << std::endl;
+        std::cout << "Inserction Sort" << std::endl;
+        grafo.ImprimirGrafo();
+        std::cout << "_________" << std::endl;
+        
+        MetodosOrdenacao.InserctionSort();
+        grafo.ImprimirGrafo();
+        std::cout << "_________" << std::endl;
+
+        std::cout << "É guloso?" << std::endl;
+        std::string resultado = EhGuloso.VerificarColoracao();
+        std::cout << resultado << std::endl;
+
+
+
     } else if (metodoOrdenacao == 'q') {
         std::cout << "Entrou aqui" << std::endl;
+
+
+
     } else if (metodoOrdenacao == 'm') {
-      grafo.ImprimirGrafo();
-      vertices->inverterItens(0, 5);
-      grafo.ImprimirGrafo();
+        std::cout << "_________" << std::endl;
+        std::cout << "Merge Sort" << std::endl;
+        grafo.ImprimirGrafo();
+        std::cout << "_________" << std::endl;
+        
+        MetodosOrdenacao.MergeSort(vertices, 0, numVertices - 1); // Chama o MergeSort diretamente
+        grafo.ImprimirGrafo();
+        std::cout << "_________" << std::endl;
+
+        std::cout << "É guloso?" << std::endl;
+        std::string resultado = EhGuloso.VerificarColoracao();
+        std::cout << resultado << std::endl;
+
+
     } else if (metodoOrdenacao == 'p') {
         std::cout << "Entrou aqui" << std::endl;
+
+
     } else if (metodoOrdenacao == 'y') {
         grafo.ImprimirGrafo();
     } else {
