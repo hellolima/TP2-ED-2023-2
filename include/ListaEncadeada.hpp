@@ -124,7 +124,7 @@ class ListaEncadeada
 
 
         TipoDado Obter(int indice){
-            std::cout << "Debug: Tentando obter elemento no índice " << indice << std::endl;
+            //std::cout << "Debug: Tentando obter elemento no índice " << indice << std::endl;
             auto atual = _cabeca;
 
             for (int i = 0; i < indice; i++){
@@ -135,7 +135,7 @@ class ListaEncadeada
                 atual = atual->proximo;
             }
 
-            std::cout << "Debug: Elemento obtido com sucesso." << std::endl;
+            //std::cout << "Debug: Elemento obtido com sucesso." << std::endl;
             return atual->dado;
         }
 
@@ -174,7 +174,7 @@ class ListaEncadeada
             no2->dado = aux;
         }
 
-        void setarItem(int indiceSetado, int indiceOriginal, ListaEncadeada<TipoDado>* listaOriginal) {
+        /* void setarItem(int indiceSetado, int indiceOriginal, ListaEncadeada<TipoDado>* listaOriginal) {
             No<TipoDado>* no1 = _cabeca;
             No<TipoDado>* no2 = listaOriginal->_cabeca;
 
@@ -191,9 +191,19 @@ class ListaEncadeada
             TipoDado aux = no2->dado;
             no2->dado = no1->dado;
             no1->dado = aux;
+        } */
+
+        void setarItem(int indiceSetado, TipoDado item) {
+            No<TipoDado>* no1 = _cabeca;
+
+            // Encontrar os nós correspondentes aos índices
+            for (int i = 0; i < indiceSetado; ++i) {
+                no1 = no1->proximo;
+            }
+
+            // Trocar os dados dos nós, não os nós inteiros
+            no1->dado = item;
         }
-
-
 
 
         

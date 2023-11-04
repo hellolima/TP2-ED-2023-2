@@ -21,6 +21,8 @@ class MetodosOrdenacao {
         void BubbleSort();
         void SelectionSort();
         void InserctionSort();
+        void MergeSort(ListaEncadeada<Vertice*>* vertices, int esq, int dir);
+        void Merge(ListaEncadeada<Vertice*>* vertices, int esq, int meio, int dir); 
         
 };
 

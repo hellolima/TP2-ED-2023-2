@@ -104,8 +104,13 @@ int main(int argc, char const *argv[]) {
     } else if (metodoOrdenacao == 'm') {
         std::cout << "Merge Sort" << std::endl;
         
-        Vertice* verticeAtual = vertices->Obter(1);
-        std::cout << "meu vertice "<< verticeAtual << std::endl;
+        MetodosOrdenacao.MergeSort(vertices, 0, numVertices-1);
+        grafo.ImprimirGrafo();
+        std::cout << "_________" << std::endl;
+        
+        std::cout << "É guloso?" << std::endl;
+        std::string resultado = EhGuloso.VerificarColoracao();
+        std::cout << resultado << std::endl;
 
     } else if (metodoOrdenacao == 'p') {
         std::cout << "Entrou aqui" << std::endl;
@@ -117,7 +122,6 @@ int main(int argc, char const *argv[]) {
         std::cerr << "Método de ordenação inválido." << std::endl;
         return FALHA;
     }
-
 
     return SUCCESSO;
 }
