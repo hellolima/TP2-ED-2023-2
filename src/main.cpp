@@ -48,94 +48,49 @@ int main(int argc, char const *argv[]) {
 
     // Lógica de ordenação
     if (metodoOrdenacao == 'b') {
-        std::cout << "_________" << std::endl;
-        std::cout << "Bubble Sort" << std::endl;
-        grafo.ImprimirGrafo();
-        std::cout << "_________" << std::endl;
-        
         MetodosOrdenacao.BubbleSort();
-        grafo.ImprimirGrafo();
-        std::cout << "_________" << std::endl;
-        std::cout << "É guloso?" << std::endl;
         std::string resultado = EhGuloso.VerificarColoracao();
         std::cout << resultado << std::endl;
 
 
 
     } else if (metodoOrdenacao == 's') {
-        std::cout << "_________" << std::endl;
-        std::cout << "Selection Sort" << std::endl;
-        grafo.ImprimirGrafo();
-        std::cout << "_________" << std::endl;
-        
         MetodosOrdenacao.SelectionSort();
-        grafo.ImprimirGrafo();
-        std::cout << "_________" << std::endl;
-
-        std::cout << "É guloso?" << std::endl;
         std::string resultado = EhGuloso.VerificarColoracao();
         std::cout << resultado << std::endl;
 
 
 
 
-    } else if (metodoOrdenacao == 'i') {
-        std::cout << "_________" << std::endl;
-        std::cout << "Inserction Sort" << std::endl;
-        grafo.ImprimirGrafo();
-        std::cout << "_________" << std::endl;
-        
+    } else if (metodoOrdenacao == 'i') { 
         MetodosOrdenacao.InserctionSort();
-        grafo.ImprimirGrafo();
-        std::cout << "_________" << std::endl;
-
-        std::cout << "É guloso?" << std::endl;
         std::string resultado = EhGuloso.VerificarColoracao();
         std::cout << resultado << std::endl;
 
 
 
     } else if (metodoOrdenacao == 'q') {
-        std::cout << "_________" << std::endl;
-        std::cout << "Quick Sort" << std::endl;
-        grafo.ImprimirGrafo();
-        std::cout << "_________" << std::endl;
-        
         MetodosOrdenacao.QuickSort();
-        grafo.ImprimirGrafo();
-        std::cout << "_________" << std::endl;
-
-        std::cout << "É guloso?" << std::endl;
         std::string resultado = EhGuloso.VerificarColoracao();
         std::cout << resultado << std::endl;
 
 
 
     } else if (metodoOrdenacao == 'm') {
-        std::cout << "Merge Sort" << std::endl;
-        
         MetodosOrdenacao.MergeSort(vertices, 0, numVertices-1);
-        grafo.ImprimirGrafo();
-        std::cout << "_________" << std::endl;
-        
-        std::cout << "É guloso?" << std::endl;
         std::string resultado = EhGuloso.VerificarColoracao();
         std::cout << resultado << std::endl;
         
 
     } else if (metodoOrdenacao == 'p') {
-        std::cout << "Heap Sort" << std::endl;
-        
         MetodosOrdenacao.HeapSort(vertices);
-        grafo.ImprimirGrafo();
-        std::cout << "_________" << std::endl;
-        
-        std::cout << "É guloso?" << std::endl;
         std::string resultado = EhGuloso.VerificarColoracao();
         std::cout << resultado << std::endl;
 
     } else if (metodoOrdenacao == 'y') {
-        grafo.ImprimirGrafo();
+        MetodosOrdenacao.HeapSort(vertices);
+        std::string resultado = EhGuloso.VerificarColoracao();
+        std::cout << resultado << std::endl;
     } else {
         std::cerr << "Método de ordenação inválido." << std::endl;
         return FALHA;

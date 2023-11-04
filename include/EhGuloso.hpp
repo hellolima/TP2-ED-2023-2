@@ -27,7 +27,7 @@ class EhGuloso{
                 for (int j = 0; j < verticesVizinhos->Tamanho(); j++) {
                     if (verticesVizinhos->Obter(j)->GetCor() == vertice->GetCor()) {
                         return false;
-                    }
+                    } 
                 }
             }
             return true;
