@@ -25,9 +25,9 @@ class EhGuloso{
                 ListaEncadeada<Vertice*>* verticesVizinhos = vertice->ObterVerticesVizinhos();
 
                 for (int j = 0; j < verticesVizinhos->Tamanho(); j++) {
-                    if (verticesVizinhos->Obter(j)->GetCor() == vertice->GetCor()) {
+                    if (verticesVizinhos->Obter(j)->GetCor() > vertice->GetCor()) {
                         return false;
-                    } 
+                    }
                 }
             }
             return true;
