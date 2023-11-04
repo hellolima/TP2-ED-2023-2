@@ -42,62 +42,10 @@ void MetodosOrdenacao::InserctionSort(){
 	}
 };
 
-/* void MetodosOrdenacao::Merge(ListaEncadeada<Vertice*> l, int esq, int dir, int meio) {
-	int n1 = meio - esq + 1;
-	int n2 = dir - meio;
-
-	ListaEncadeada<Vertice*> *Esquerda = new ListaEncadeada<Vertice*>;
-	ListaEncadeada<Vertice*> *Direita = new ListaEncadeada<Vertice*>;
-
-	for (int i = 0; i < n1; i++) {
-		Esquerda->Inserir(l->GetItem(esq + i));
-	}
-
-	for (int i = 0; i < n2; i++) {
-		Direita->InsereFinal(l->GetItem(meio + 1 + i));
-	}
-
-	int i = 0;
-	int j = 0;
-	int k = esq;
-	while (i < n1 && j < n2) {
-		Vertice a = Esquerda->GetItem(i);
-		Vertice* b = Direita->GetItem(j);
-		if (a->ComparaComMenorOuIgual(b)) {
-		l->SetValor(a, k);
-		i++;
-		}
-		else {
-		l->SetValor(b, k);
-		j++;
-		}
-		k++;
-	}
-
-	// Copie os elementos restantes de Esquerda, se houver algum
-	while (i < n1) {
-		Vertice* a = Esquerda->GetItem(i);
-		l->SetValor(a, k);
-		i++;
-		k++;
-	}
-
-	// Copie os elementos restantes de Direita, se houver algum
-	while (j < n2) {
-		Vertice* b = Direita->GetItem(j);
-		l->SetValor(b, k);
-		j++;
-		k++;
-	}
-
-	// Libere a memória dos vetores temporários
-	delete Esquerda;
-	delete Direita;
-}
- */
 
  void MetodosOrdenacao::MergeSort(ListaEncadeada<Vertice*>* vertices, int esq, int dir) {
 	 int meio;
+
      if (esq < dir) {
          meio = esq + (dir - esq) / 2;
          // Ordena as duas metades
@@ -158,3 +106,40 @@ void MetodosOrdenacao::InserctionSort(){
      delete  Esquerda; //*  ***********FAZER O DESTRUTOR 
      delete  Direita; //*  ***********FAZER O DESTRUTOR 
  }
+
+ void MetodosOrdenacao::Particao(int esq, int dir, int *i, int *j, ListaEncadeada<Vertice*>* vertices){ 
+    *i = esq;
+    *j = dir;
+    Vertice* pivo = vertices->Obter((*i + *j) / 2);
+
+    while (*i <= *j) {
+        while (vertices->Obter(*i)->GetCor() < pivo->GetCor()) {
+            (*i)++;
+        }
+        while (vertices->Obter(*j)->GetCor() > pivo->GetCor()) {
+            (*j)--;
+        }
+        if (*i <= *j) {
+            vertices->inverterItens(*i, *j);
+            (*i)++;
+            (*j)--;
+        }
+    }
+}
+
+
+void MetodosOrdenacao::Ordena(int esq, int dir, ListaEncadeada<Vertice*>* vertices){ 
+
+	int i, j;
+
+	
+  	Particao(esq, dir, &i, &j, vertices);
+  	
+  	if (esq < j) Ordena(esq, j, vertices);
+  	
+  	if (i < dir) Ordena(i, dir, vertices);
+}
+
+void MetodosOrdenacao::QuickSort(){ 
+  	Ordena(0, vertices->Tamanho()-1, vertices); 
+}

@@ -41,7 +41,6 @@ int main(int argc, char const *argv[]) {
         vertices = grafo.ObterVertices();
         Vertice* verticeAtual = vertices->Obter(i);
         verticeAtual->setCor(corVertice);
-        std::cout << "meu vertice "<< verticeAtual << std::endl;
     }
 
     MetodosOrdenacao MetodosOrdenacao(&grafo);
@@ -97,7 +96,18 @@ int main(int argc, char const *argv[]) {
 
 
     } else if (metodoOrdenacao == 'q') {
-        std::cout << "Entrou aqui" << std::endl;
+        std::cout << "_________" << std::endl;
+        std::cout << "Quick Sort" << std::endl;
+        grafo.ImprimirGrafo();
+        std::cout << "_________" << std::endl;
+        
+        MetodosOrdenacao.QuickSort();
+        grafo.ImprimirGrafo();
+        std::cout << "_________" << std::endl;
+
+        std::cout << "É guloso?" << std::endl;
+        std::string resultado = EhGuloso.VerificarColoracao();
+        std::cout << resultado << std::endl;
 
 
 
@@ -111,6 +121,7 @@ int main(int argc, char const *argv[]) {
         std::cout << "É guloso?" << std::endl;
         std::string resultado = EhGuloso.VerificarColoracao();
         std::cout << resultado << std::endl;
+        
 
     } else if (metodoOrdenacao == 'p') {
         std::cout << "Entrou aqui" << std::endl;
@@ -122,6 +133,7 @@ int main(int argc, char const *argv[]) {
         std::cerr << "Método de ordenação inválido." << std::endl;
         return FALHA;
     }
+
 
     return SUCCESSO;
 }
