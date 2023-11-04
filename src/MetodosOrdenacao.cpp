@@ -155,6 +155,6 @@ void MetodosOrdenacao::InserctionSort(){
          k++;
      }
      // Libera a memória das listas temporárias
-     //delete [] Esquerda; //*  ***********FAZER O DESTRUTOR 
-     //delete [] Direita; //*  ***********FAZER O DESTRUTOR 
+     delete  Esquerda; //*  ***********FAZER O DESTRUTOR 
+     delete  Direita; //*  ***********FAZER O DESTRUTOR 
  }
