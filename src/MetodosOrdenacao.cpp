@@ -48,20 +48,18 @@ void MetodosOrdenacao::InserctionSort(){
 
      if (esq < dir) {
          meio = esq + (dir - esq) / 2;
-         // Ordena as duas metades
          MergeSort(vertices, esq, meio);
          MergeSort(vertices, meio + 1, dir);
-         // Junta as duas metades ordenadas
          Merge(vertices, esq, meio, dir);
      }
  }
  void MetodosOrdenacao::Merge(ListaEncadeada<Vertice*>* vertices, int esq, int meio, int dir) {
      int n1 = meio - esq + 1;
      int n2 = dir - meio;
-     // Cria listas temporárias para armazenar as duas metades
+     
      ListaEncadeada<Vertice*>* Esquerda = new ListaEncadeada<Vertice*>;
      ListaEncadeada<Vertice*>* Direita = new ListaEncadeada<Vertice*>;
-     // Copia os elementos para as listas temporárias
+     
      for (int i = 0; i < n1; i++) {
          Esquerda->Inserir(vertices->Obter(esq + i));
      }
@@ -71,40 +69,36 @@ void MetodosOrdenacao::InserctionSort(){
      int i = 0;
      int j = 0;
      int k = esq;
-     // Merge das listas temporárias de volta para vertices
+    
      while (i < n1 && j < n2) {
          Vertice* a = Esquerda->Obter(i);
          Vertice* b = Direita->Obter(j);
          if (a->GetCor() <= b->GetCor()) {
-             //vertices->Inserir(a);
 			 vertices->setarItem(k, a);
              i++;
          } else {
-             //vertices->Inserir(b);
 			 vertices->setarItem(k, b);
              j++;
          }
          k++;
      }
-     // Copia os elementos restantes de Esquerda, se houver algum
+ 
      while (i < n1) {
          Vertice* a = Esquerda->Obter(i);
-         //vertices->Inserir(a);
 		 vertices->setarItem(k, a);
          i++;
          k++;
      }
-     // Copia os elementos restantes de Direita, se houver algum
+   
      while (j < n2) {
          Vertice* b = Direita->Obter(j);
-         //vertices->Inserir(b);
 		 vertices->setarItem(k, b);
          j++;
          k++;
      }
-     // Libera a memória das listas temporárias
-     delete  Esquerda; //*  ***********FAZER O DESTRUTOR 
-     delete  Direita; //*  ***********FAZER O DESTRUTOR 
+    
+     delete  Esquerda; 
+     delete  Direita; 
  }
 
  void MetodosOrdenacao::Particao(int esq, int dir, int *i, int *j, ListaEncadeada<Vertice*>* vertices){ 
@@ -142,4 +136,41 @@ void MetodosOrdenacao::Ordena(int esq, int dir, ListaEncadeada<Vertice*>* vertic
 
 void MetodosOrdenacao::QuickSort(){ 
   	Ordena(0, vertices->Tamanho()-1, vertices); 
+}
+
+
+void MetodosOrdenacao::Heapify(ListaEncadeada<Vertice*>* vertices, int n, int raiz, int* comparacoes) {
+    int maior = raiz;
+    int esq = 2 * raiz + 1;
+    int dir = 2 * raiz + 2;
+
+    (*comparacoes)++;
+    if (esq < n && vertices->Obter(esq)->GetCor() > vertices->Obter(maior)->GetCor()) {
+        maior = esq;
+    }
+
+    (*comparacoes)++;
+    if (dir < n && vertices->Obter(dir)->GetCor() > vertices->Obter(maior)->GetCor()) {
+        maior = dir;
+    }
+
+    if (maior != raiz) {
+        vertices->inverterItens(raiz, maior);
+        Heapify(vertices, n, maior, comparacoes);
+    }
+}
+
+void MetodosOrdenacao::HeapSort(ListaEncadeada<Vertice*>* vertices) {
+    int n = vertices->Tamanho();
+
+    int numComparacoes = 0;
+
+    for (int raiz = n / 2 - 1; raiz >= 0; raiz--) {
+        Heapify(vertices, n, raiz, &numComparacoes);
+    }
+
+    for (int i = n - 1; i > 0; i--) {
+        vertices->inverterItens(0, i);
+        Heapify(vertices, i, 0, &numComparacoes);
+    }
 }

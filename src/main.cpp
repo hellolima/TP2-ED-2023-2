@@ -124,8 +124,15 @@ int main(int argc, char const *argv[]) {
         
 
     } else if (metodoOrdenacao == 'p') {
-        std::cout << "Entrou aqui" << std::endl;
-
+        std::cout << "Heap Sort" << std::endl;
+        
+        MetodosOrdenacao.HeapSort(vertices);
+        grafo.ImprimirGrafo();
+        std::cout << "_________" << std::endl;
+        
+        std::cout << "É guloso?" << std::endl;
+        std::string resultado = EhGuloso.VerificarColoracao();
+        std::cout << resultado << std::endl;
 
     } else if (metodoOrdenacao == 'y') {
         grafo.ImprimirGrafo();
