@@ -49,6 +49,10 @@ class ListaEncadeada
             return _tamanho;
         }
 
+        No<TipoDado>* Cabeca(){
+            return _cabeca;
+        }
+
         void Inserir(TipoDado dado){
             auto novoNo = new No<TipoDado>;
             novoNo->dado = dado;
@@ -127,10 +131,7 @@ class ListaEncadeada
             auto atual = _cabeca;
 
             for (int i = 0; i < indice; i++){
-                if (atual == nullptr) {
-                    std::cerr << "Erro: Tentativa de acessar índice inválido." << std::endl;
-                    return nullptr; 
-                }
+                
                 atual = atual->proximo;
             }
 
@@ -188,6 +189,17 @@ class ListaEncadeada
                 no1->dado = item;
             }
             
+        }
+
+        void Imprimir() {
+            No<TipoDado>* atual = _cabeca;
+
+            while (atual != nullptr) {
+                std::cout << "cor do vertice " <<  atual->dado->GetCor() << " ";
+                atual = atual->proximo;
+            }
+
+            std::cout << std::endl;
         }
 
 
