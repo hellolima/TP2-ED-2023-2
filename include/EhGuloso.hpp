@@ -49,7 +49,6 @@ public:
 
 
     std::string VerificarColoracao() {
-        
         std::string permutacao = "1";
         for (int i = 0; i < vertices->Tamanho(); i++) {
             Vertice* vertice = vertices->Obter(i);

@@ -1,46 +1,51 @@
 #include "MetodosOrdenacao.hpp"
 #include <iostream>
 
-void MetodosOrdenacao::BubbleSort(){
-	int i, j; 
-            
-    for(i = 0; i < quantidadeVertices - 1; i++){
-        for(j = 1; j <= quantidadeVertices - 1; j++){
-            if ((vertices->Obter(j)->GetCor()) < (vertices->Obter(j-1)->GetCor())){
-                vertices->inverterItens(j-1, j);
-             }
+void MetodosOrdenacao::BubbleSort() {
+    int i, j;
+    for (i = 0; i < quantidadeVertices - 1; i++) {
+        for (j = 1; j <= quantidadeVertices - 1; j++) {
+            if (vertices->Obter(j)->GetCor() < vertices->Obter(j - 1)->GetCor() ||
+                (vertices->Obter(j)->GetCor() == vertices->Obter(j - 1)->GetCor() &&
+                 vertices->Obter(j)->GetId() < vertices->Obter(j - 1)->GetId())) {
+                vertices->inverterItens(j - 1, j);
+            }
         }
     }
 };
 
-void MetodosOrdenacao::SelectionSort(){
-	int i, j, min;
 
-	for (i = 0; i < quantidadeVertices - 1; i++){
-		min = i;
-		for(j = i + 1; j < quantidadeVertices; j++){
-			if((vertices->Obter(j)->GetCor()) < (vertices->Obter(min)->GetCor())){
-				min = j;
-			}
-		vertices->inverterItens(i, min);
-		}
-	}
+void MetodosOrdenacao::SelectionSort() {
+    int i, j, min;
+    for (i = 0; i < quantidadeVertices - 1; i++) {
+        min = i;
+        for (j = i + 1; j < quantidadeVertices; j++) {
+            if (vertices->Obter(j)->GetCor() < vertices->Obter(min)->GetCor() ||
+                (vertices->Obter(j)->GetCor() == vertices->Obter(min)->GetCor() &&
+                 vertices->Obter(j)->GetId() < vertices->Obter(min)->GetId())) {
+                min = j;
+            }
+        }
+        vertices->inverterItens(i, min);
+    }
 };
 
-void MetodosOrdenacao::InserctionSort(){
-	int i, j;
-	Vertice* chave;
 
-	for (i = 1; i < quantidadeVertices; i++) {
-		chave = vertices->Obter(i);
-		j = i - 1;
-
-		while ((j >= 0) && ((vertices->Obter(j)->GetCor()) > (chave->GetCor()))) {
-			vertices->inverterItens(j, j + 1);
-			j--;
-		}
-	}
+void MetodosOrdenacao::InserctionSort() {
+    int i, j;
+    Vertice* chave;
+    for (i = 1; i < quantidadeVertices; i++) {
+        chave = vertices->Obter(i);
+        j = i - 1;
+        while (j >= 0 && (vertices->Obter(j)->GetCor() > chave->GetCor() ||
+                           (vertices->Obter(j)->GetCor() == chave->GetCor() &&
+                            vertices->Obter(j)->GetId() > chave->GetId()))) {
+            vertices->inverterItens(j, j + 1);
+            j--;
+        }
+    }
 };
+
 
 
  void MetodosOrdenacao::MergeSort(ListaEncadeada<Vertice*>* vertices, int esq, int dir) {
@@ -70,18 +75,19 @@ void MetodosOrdenacao::InserctionSort(){
      int j = 0;
      int k = esq;
     
-     while (i < n1 && j < n2) {
-         Vertice* a = Esquerda->Obter(i);
-         Vertice* b = Direita->Obter(j);
-         if (a->GetCor() <= b->GetCor()) {
-			 vertices->setarItem(k, a);
-             i++;
-         } else {
-			 vertices->setarItem(k, b);
-             j++;
-         }
-         k++;
-     }
+      while (i < n1 && j < n2) {
+        Vertice* a = Esquerda->Obter(i);
+        Vertice* b = Direita->Obter(j);
+        if (a->GetCor() < b->GetCor() ||
+            (a->GetCor() == b->GetCor() && a->GetId() < b->GetId())) {
+            vertices->setarItem(k, a);
+            i++;
+        } else {
+            vertices->setarItem(k, b);
+            j++;
+        }
+        k++;
+    }
  
      while (i < n1) {
          Vertice* a = Esquerda->Obter(i);
@@ -107,10 +113,14 @@ void MetodosOrdenacao::InserctionSort(){
     Vertice* pivo = vertices->Obter((*i + *j) / 2);
 
     while (*i <= *j) {
-        while (vertices->Obter(*i)->GetCor() < pivo->GetCor()) {
+        while (vertices->Obter(*i)->GetCor() < pivo->GetCor() ||
+               (vertices->Obter(*i)->GetCor() == pivo->GetCor() &&
+                vertices->Obter(*i)->GetId() < pivo->GetId())) {
             (*i)++;
         }
-        while (vertices->Obter(*j)->GetCor() > pivo->GetCor()) {
+        while (vertices->Obter(*j)->GetCor() > pivo->GetCor() ||
+               (vertices->Obter(*j)->GetCor() == pivo->GetCor() &&
+                vertices->Obter(*j)->GetId() > pivo->GetId())) {
             (*j)--;
         }
         if (*i <= *j) {
@@ -145,12 +155,16 @@ void MetodosOrdenacao::Heapify(ListaEncadeada<Vertice*>* vertices, int n, int ra
     int dir = 2 * raiz + 2;
 
     (*comparacoes)++;
-    if (esq < n && vertices->Obter(esq)->GetCor() > vertices->Obter(maior)->GetCor()) {
+    if (esq < n && (vertices->Obter(esq)->GetCor() > vertices->Obter(maior)->GetCor() ||
+                    (vertices->Obter(esq)->GetCor() == vertices->Obter(maior)->GetCor() &&
+                     vertices->Obter(esq)->GetId() > vertices->Obter(maior)->GetId()))) {
         maior = esq;
     }
 
     (*comparacoes)++;
-    if (dir < n && vertices->Obter(dir)->GetCor() > vertices->Obter(maior)->GetCor()) {
+    if (dir < n && (vertices->Obter(dir)->GetCor() > vertices->Obter(maior)->GetCor() ||
+                    (vertices->Obter(dir)->GetCor() == vertices->Obter(maior)->GetCor() &&
+                     vertices->Obter(dir)->GetId() > vertices->Obter(maior)->GetId()))) {
         maior = dir;
     }
 
@@ -162,7 +176,6 @@ void MetodosOrdenacao::Heapify(ListaEncadeada<Vertice*>* vertices, int n, int ra
 
 void MetodosOrdenacao::HeapSort(ListaEncadeada<Vertice*>* vertices) {
     int n = vertices->Tamanho();
-
     int numComparacoes = 0;
 
     for (int raiz = n / 2 - 1; raiz >= 0; raiz--) {
@@ -174,3 +187,4 @@ void MetodosOrdenacao::HeapSort(ListaEncadeada<Vertice*>* vertices) {
         Heapify(vertices, i, 0, &numComparacoes);
     }
 }
+
