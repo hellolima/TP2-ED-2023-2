@@ -21,7 +21,6 @@ void Grafo::InsereVertice(int id){
 }
 
 void Grafo::InsereAresta(int idV, int idW){
-    // Encontre os vértices com base nos IDs
     Vertice* verticeV = nullptr;
     Vertice* verticeW = nullptr;
     for (int i = 0; i < vertices->Tamanho(); i++)
@@ -36,20 +35,18 @@ void Grafo::InsereAresta(int idV, int idW){
             verticeW = vertice;
         }
 
-        // Se ambos os vértices foram encontrados, pare de procurar
+        
         if (verticeV != nullptr && verticeW != nullptr)
         {
             break;
         }
     }
 
-    // Se algum dos vértices não foi encontrado, saia
     if (verticeV == nullptr || verticeW == nullptr)
     {
         return;
     }
 
-    // Adicione a aresta entre os vértices
     verticeV->ObterVerticesVizinhos()->Inserir(verticeW);
     verticeW->ObterVerticesVizinhos()->Inserir(verticeV);
 }
