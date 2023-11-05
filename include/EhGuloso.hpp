@@ -49,15 +49,13 @@ public:
 
 
     std::string VerificarColoracao() {
-        if (VerticesGulosos()) {
-            std::string permutacao = "1";
-            for (int i = 0; i < vertices->Tamanho(); i++) {
-                Vertice* vertice = vertices->Obter(i);
-                permutacao = permutacao + " " + std::to_string(vertice->GetId());
-            }
-            return permutacao;
+        
+        std::string permutacao = "1";
+        for (int i = 0; i < vertices->Tamanho(); i++) {
+            Vertice* vertice = vertices->Obter(i);
+            permutacao = permutacao + " " + std::to_string(vertice->GetId());
         }
-        return "0";
+        return permutacao;
     }
 };
 
