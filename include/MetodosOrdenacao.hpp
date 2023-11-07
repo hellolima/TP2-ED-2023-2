@@ -28,7 +28,7 @@ class MetodosOrdenacao {
         void Particao(int esq, int dir, int *i, int *j, ListaEncadeada<Vertice*>* vertices);
         void Ordena(int esq, int dir, ListaEncadeada<Vertice*>* vertices);
         void Heapify(ListaEncadeada<Vertice*>* vertices, int n, int raiz, int* comparacoes);
-        void HeapSort(ListaEncadeada<Vertice*>* vertices);
+        void HeapSort();
 };
 
 #endif

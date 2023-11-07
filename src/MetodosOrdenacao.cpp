@@ -7,7 +7,7 @@ void MetodosOrdenacao::BubbleSort() {
         for (j = 1; j <= quantidadeVertices - 1; j++) {
             if (vertices->Obter(j)->GetCor() < vertices->Obter(j - 1)->GetCor() ||
                 (vertices->Obter(j)->GetCor() == vertices->Obter(j - 1)->GetCor() &&
-                 vertices->Obter(j)->GetId() < vertices->Obter(j - 1)->GetId())) {
+                vertices->Obter(j)->GetId() < vertices->Obter(j - 1)->GetId())) {
                 vertices->inverterItens(j - 1, j);
             }
         }
@@ -48,7 +48,7 @@ void MetodosOrdenacao::InserctionSort() {
 
 
 
- void MetodosOrdenacao::MergeSort(ListaEncadeada<Vertice*>* vertices, int esq, int dir) {
+void MetodosOrdenacao::MergeSort(ListaEncadeada<Vertice*>* vertices, int esq, int dir) {
 	 int meio;
 
      if (esq < dir) {
@@ -174,7 +174,7 @@ void MetodosOrdenacao::Heapify(ListaEncadeada<Vertice*>* vertices, int n, int ra
     }
 }
 
-void MetodosOrdenacao::HeapSort(ListaEncadeada<Vertice*>* vertices) {
+void MetodosOrdenacao::HeapSort() {
     int n = vertices->Tamanho();
     int numComparacoes = 0;
 

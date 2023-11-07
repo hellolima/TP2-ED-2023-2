@@ -94,7 +94,7 @@ int main(int argc, char const *argv[]) {
         case 'p':
         case 'y':
             if (verticesGulosos) {
-                MetodosOrdenacao.HeapSort(vertices);
+                MetodosOrdenacao.HeapSort();
                 resultado = EhGuloso.VerificarColoracao();
             } else {
                 resultado = "0";

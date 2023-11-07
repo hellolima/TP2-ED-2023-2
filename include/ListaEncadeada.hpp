@@ -25,15 +25,13 @@ class ListaEncadeada
         int _tamanho;
 
     public:
-        ListaEncadeada()
-        {
+        ListaEncadeada(){
             _cabeca = nullptr;
             _cauda = nullptr;
             _tamanho = 0;
         };
 
-        ~ListaEncadeada()
-        {
+        ~ListaEncadeada(){
             auto atual = _cabeca;
 
             while (atual != nullptr)
@@ -44,8 +42,7 @@ class ListaEncadeada
             }
         }
 
-        int Tamanho()
-        {
+        int Tamanho(){
             return _tamanho;
         }
 
@@ -59,13 +56,11 @@ class ListaEncadeada
             novoNo->proximo = nullptr;
             novoNo->anterior = _cauda;
 
-            if (_cabeca == nullptr)
-            {
+            if (_cabeca == nullptr){
                 _cabeca = novoNo;
                 _cauda = novoNo;
             }
-            else
-            {
+            else{
                 _cauda->proximo = novoNo;
                 novoNo->anterior = _cauda;
                 _cauda = novoNo;
@@ -75,7 +70,7 @@ class ListaEncadeada
         }
 
         void RemoverNoInicio() {
-            if (_cabeca == nullptr) {
+            if (_cabeca == nullptr){
                 return;
             }
 
@@ -99,24 +94,18 @@ class ListaEncadeada
             {
                 if (atual->dado == dado)
                 {
-                    if (atual->anterior != nullptr)
-                    {
+                    if (atual->anterior != nullptr){
                         atual->anterior->proximo = atual->proximo;
                     }
-                    if (atual->proximo != nullptr)
-                    {
+                    if (atual->proximo != nullptr){
                         atual->proximo->anterior = atual->anterior;
                     }
-
-                    if (atual == _cabeca)
-                    {
+                    if (atual == _cabeca){
                         _cabeca = atual->proximo;
                     }
-                    if (atual == _cauda)
-                    {
+                    if (atual == _cauda){
                         _cauda = atual->anterior;
                     }
-
                     delete atual;
                     _tamanho--;
                     return;
@@ -139,23 +128,11 @@ class ListaEncadeada
         }
 
 
-        bool Vazia()
-        {
+        bool Vazia(){
             return _tamanho == 0;
         }
 
         void inverterItens(int indice1, int indice2) {
-            // if (indice1 < 0 || indice2 < 0 || indice1 >= _tamanho || indice2 >= _tamanho) {
-            //     std::cerr << "Índices inválidos." << std::endl;
-            //     return;
-            // }
-
-            // if (indice1 == indice2) {
-            //     // Não há necessidade de inverter se os índices forem iguais
-            //     return;
-            // }
-
-            // Encontrar os nós correspondentes aos índices
             No<TipoDado>* no1 = _cabeca;
             No<TipoDado>* no2 = _cabeca;
 
@@ -167,7 +144,6 @@ class ListaEncadeada
                 no2 = no2->proximo;
             }
 
-            // Trocar os dados dos nós
             TipoDado aux = no1->dado;
             no1->dado = no2->dado;
             no2->dado = aux;
@@ -181,7 +157,6 @@ class ListaEncadeada
                 no1->dado = item;
             }
 
-            // Encontrar os nós correspondentes aos índices
             else{
                 for (int i = 0; i < indiceSetado; ++i) {
                     no1 = no1->proximo;
@@ -195,7 +170,6 @@ class ListaEncadeada
             No<TipoDado>* atual = _cabeca;
 
             while (atual != nullptr) {
-                std::cout << "cor do vertice " <<  atual->dado->GetCor() << " ";
                 atual = atual->proximo;
             }
 
