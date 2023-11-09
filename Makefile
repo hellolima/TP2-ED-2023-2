@@ -9,7 +9,7 @@ OBJECTS := $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 
 # -g debug, --coverage cobertura
 CFLAGS := -Wall -std=c++17 #-pg
-INC := -I include/ -I third_party/
+INC := -I include/ -I third_party/ 
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(@D)

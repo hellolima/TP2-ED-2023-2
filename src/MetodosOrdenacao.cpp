@@ -1,18 +1,25 @@
 #include "MetodosOrdenacao.hpp"
 #include <iostream>
 
+
 void MetodosOrdenacao::BubbleSort() {
     int i, j;
     for (i = 0; i < quantidadeVertices - 1; i++) {
         for (j = 1; j <= quantidadeVertices - 1; j++) {
+            LEMEMLOG((long int)(&(vertices->Obter(j))), sizeof(Vertice), 0);
+            LEMEMLOG((long int)(&(vertices->Obter(j - 1))), sizeof(Vertice), 0);
+
             if (vertices->Obter(j)->GetCor() < vertices->Obter(j - 1)->GetCor() ||
                 (vertices->Obter(j)->GetCor() == vertices->Obter(j - 1)->GetCor() &&
                 vertices->Obter(j)->GetId() < vertices->Obter(j - 1)->GetId())) {
                 vertices->inverterItens(j - 1, j);
+
+                ESCREVEMEMLOG((long int)(&(vertices->Obter(j - 1))), sizeof(Vertice), 0);
+                ESCREVEMEMLOG((long int)(&(vertices->Obter(j))), sizeof(Vertice), 0);
             }
         }
     }
-};
+}
 
 
 void MetodosOrdenacao::SelectionSort() {
@@ -30,7 +37,6 @@ void MetodosOrdenacao::SelectionSort() {
     }
 };
 
-
 void MetodosOrdenacao::InserctionSort() {
     int i, j;
     Vertice* chave;
@@ -45,8 +51,6 @@ void MetodosOrdenacao::InserctionSort() {
         }
     }
 };
-
-
 
 void MetodosOrdenacao::MergeSort(ListaEncadeada<Vertice*>* vertices, int esq, int dir) {
 	 int meio;

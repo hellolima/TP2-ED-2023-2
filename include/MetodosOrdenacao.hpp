@@ -4,6 +4,7 @@
 #include "ListaEncadeada.hpp"
 #include "Vertice.hpp"
 #include "Grafo.hpp"
+#include "memlog.hpp"
 
 class MetodosOrdenacao {
     private:
