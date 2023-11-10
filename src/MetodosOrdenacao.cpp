@@ -15,7 +15,7 @@ void MetodosOrdenacao::BubbleSort() {
 };
 
 
-void MetodosOrdenacao::SelectionSort() {
+void MetodosOrdenacao::SelectionSort(int esq, int dir) {
     int i, j, min;
     for (i = 0; i < quantidadeVertices - 1; i++) {
         min = i;
@@ -188,3 +188,24 @@ void MetodosOrdenacao::HeapSort(ListaEncadeada<Vertice*>* vertices) {
     }
 }
 
+
+void MetodosOrdenacao::OrdenacaoEficiente() {
+    EscolherOrdenacao(0, vertices->Tamanho() - 1);
+}
+
+void MetodosOrdenacao::EscolherOrdenacao(int esq, int dir) {
+    int i, j;
+    Particao(esq, dir, &i, &j, vertices);
+
+    if (j - esq < 0) {
+        SelectionSort(esq, j);
+    } else {
+        Ordena(esq, j, vertices);
+    }
+
+    if (dir - i > 10) {
+        SelectionSort(i, dir);
+    } else {
+        Ordena(i, dir, vertices);
+    }
+}
