@@ -7,45 +7,61 @@
 #define FALHA (1)
 
 int main(int argc, char const *argv[]) {
-    char metodoOrdenacao;
-    int numVertices;
-    int numArestas;
-    int corVertice;
+    try {
+        char metodoOrdenacao;
+        int numVertices;
+        int numArestas;
+        int corVertice;
 
-    std::cin >> metodoOrdenacao;
-    std::cin >> numVertices;
+        std::cin >> metodoOrdenacao;
+        std::cin >> numVertices;
 
-    Grafo grafo;
-    ListaEncadeada<Vertice*>* vertices;
+        Grafo grafo;
+        ListaEncadeada<Vertice*>* vertices;
 
-    for (int i = 0; i < numVertices; i++) {
-        grafo.InsereVertice(i);
-    }
-
-    for (int i = 0; i < numVertices; i++) {
-        std::cin >> numArestas;
-
-        for (int j = 0; j < numArestas; j++) {
-            int v;
-            std::cin >> v;
-            grafo.InsereAresta(i, v);
+        for (int i = 0; i < numVertices; i++) {
+            try {
+                grafo.InsereVertice(i);
+            } catch (const std::exception& e) {
+                std::cerr << "Erro ao inserir vértice: " << e.what() << std::endl;
+                return FALHA;
+            }
         }
-    }
 
-    for (int i = 0; i < numVertices; i++) {
-        std::cin >> corVertice;
-        vertices = grafo.ObterVertices();
-        Vertice* verticeAtual = vertices->Obter(i);
-        verticeAtual->setCor(corVertice);
-    }
+        for (int i = 0; i < numVertices; i++) {
+            std::cin >> numArestas;
 
-    MetodosOrdenacao MetodosOrdenacao(&grafo);
-    EhGuloso EhGuloso(&grafo);
+            for (int j = 0; j < numArestas; j++) {
+                int v;
+                std::cin >> v;
+                try {
+                    grafo.InsereAresta(i, v);
+                } catch (const std::exception& e) {
+                    std::cerr << "Erro ao inserir aresta: " << e.what() << std::endl;
+                    return FALHA;
+                }
+            }
+        }
 
-    std::string resultado;
-    bool verticesGulosos = EhGuloso.VerticesGulosos();
+        for (int i = 0; i < numVertices; i++) {
+            std::cin >> corVertice;
+            try {
+                vertices = grafo.ObterVertices();
+                Vertice* verticeAtual = vertices->Obter(i);
+                verticeAtual->setCor(corVertice);
+            } catch (const std::exception& e) {
+                std::cerr << "Erro ao obter vértices: " << e.what() << std::endl;
+                return FALHA;
+            }
+        }
 
-    switch (metodoOrdenacao) {
+        MetodosOrdenacao MetodosOrdenacao(&grafo);
+        EhGuloso EhGuloso(&grafo);
+
+        std::string resultado;
+        bool verticesGulosos = EhGuloso.VerticesGulosos();
+
+        switch (metodoOrdenacao) {
         case 'b':
             if (verticesGulosos) {
                 MetodosOrdenacao.BubbleSort();
@@ -113,7 +129,11 @@ int main(int argc, char const *argv[]) {
             std::cerr << "Método de ordenação inválido." << std::endl;
             return FALHA;
     }
+        std::cout << resultado << std::endl;
+        return SUCCESSO;
 
-    std::cout << resultado << std::endl;
-    return SUCCESSO;
+    } catch (const std::exception& e) {
+        std::cerr << "Erro geral: " << e.what() << std::endl;
+        return FALHA;
+    }
 }
