@@ -197,13 +197,13 @@ void MetodosOrdenacao::EscolherOrdenacao(int esq, int dir) {
     int i, j;
     Particao(esq, dir, &i, &j, vertices);
 
-    if (j - esq < 0) {
+    if (j - esq < 9) {
         SelectionSort(esq, j);
     } else {
         Ordena(esq, j, vertices);
     }
 
-    if (dir - i > 10) {
+    if (dir - i >= 9) {
         SelectionSort(i, dir);
     } else {
         Ordena(i, dir, vertices);
