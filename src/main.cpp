@@ -1,10 +1,13 @@
-#include <iostream>
+#include <chrono>
 #include "Grafo.hpp"
 #include "MetodosOrdenacao.hpp"
 #include "EhGuloso.hpp"
+#include <matplotlibcpp.h>
 
 #define SUCCESSO (0)
 #define FALHA (1)
+
+namespace plt = matplotlibcpp;
 
 int main(int argc, char const *argv[]) {
     char metodoOrdenacao;
@@ -45,66 +48,74 @@ int main(int argc, char const *argv[]) {
     std::string resultado;
     bool verticesGulosos = EhGuloso.VerticesGulosos();
 
+    std::vector<int> tamanhosDeEntrada;
+    std::vector<double> temposDeExecucao;
+
+    // Medir o tempo de execução do método de ordenação
+    auto start = std::chrono::high_resolution_clock::now();
+
     switch (metodoOrdenacao) {
         case 'b':
-            if (verticesGulosos) {
+            
                 MetodosOrdenacao.BubbleSort();
-                resultado = EhGuloso.VerificarColoracao();
-            } else {
-                resultado = "0";
-            }
+                
             break;
-
         case 's':
-            if (verticesGulosos) {
-                MetodosOrdenacao.SelectionSort();
-                resultado = EhGuloso.VerificarColoracao();
-            } else {
-                resultado = "0";
-            }
+            
+                MetodosOrdenacao.SelectionSort(0, numVertices-1);
+                
             break;
 
         case 'i':
-            if (verticesGulosos) {
+           
                 MetodosOrdenacao.InserctionSort();
-                resultado = EhGuloso.VerificarColoracao();
-            } else {
-                resultado = "0";
-            }
+                
             break;
 
         case 'q':
-            if (verticesGulosos) {
+           
                 MetodosOrdenacao.QuickSort();
-                resultado = EhGuloso.VerificarColoracao();
-            } else {
-                resultado = "0";
-            }
+                
+            
             break;
 
         case 'm':
-            if (verticesGulosos) {
+            
                 MetodosOrdenacao.MergeSort(vertices, 0, numVertices - 1);
-                resultado = EhGuloso.VerificarColoracao();
-            } else {
-                resultado = "0";
-            }
+               
+            
+            break;
+
+        case 'y':
+            
+                MetodosOrdenacao.OrdenacaoEficiente();
+               
             break;
 
         case 'p':
-        case 'y':
-            if (verticesGulosos) {
-                MetodosOrdenacao.HeapSort();
-                resultado = EhGuloso.VerificarColoracao();
-            } else {
-                resultado = "0";
-            }
+            
+                MetodosOrdenacao.HeapSort(vertices);
+               
+           
             break;
-
         default:
             std::cerr << "Método de ordenação inválido." << std::endl;
             return FALHA;
     }
+
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    double tempoEmSegundos = duration / 1000000.0;
+
+    // Adicione o tamanho da entrada e o tempo de execução aos vetores
+    tamanhosDeEntrada.push_back(numVertices);
+    temposDeExecucao.push_back(tempoEmSegundos);
+
+    // Plote os gráficos
+    plt::plot(tamanhosDeEntrada, temposDeExecucao, "bo-");
+    plt::xlabel("Tamanho da Entrada");
+    plt::ylabel("Tempo de Execução (segundos)");
+    plt::show();
 
     std::cout << resultado << std::endl;
     return SUCCESSO;

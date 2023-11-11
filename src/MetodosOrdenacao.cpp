@@ -1,28 +1,21 @@
 #include "MetodosOrdenacao.hpp"
 #include <iostream>
 
-
 void MetodosOrdenacao::BubbleSort() {
     int i, j;
     for (i = 0; i < quantidadeVertices - 1; i++) {
         for (j = 1; j <= quantidadeVertices - 1; j++) {
-            LEMEMLOG((long int)(&(vertices->Obter(j))), sizeof(Vertice), 0);
-            LEMEMLOG((long int)(&(vertices->Obter(j - 1))), sizeof(Vertice), 0);
-
             if (vertices->Obter(j)->GetCor() < vertices->Obter(j - 1)->GetCor() ||
                 (vertices->Obter(j)->GetCor() == vertices->Obter(j - 1)->GetCor() &&
-                vertices->Obter(j)->GetId() < vertices->Obter(j - 1)->GetId())) {
+                 vertices->Obter(j)->GetId() < vertices->Obter(j - 1)->GetId())) {
                 vertices->inverterItens(j - 1, j);
-
-                ESCREVEMEMLOG((long int)(&(vertices->Obter(j - 1))), sizeof(Vertice), 0);
-                ESCREVEMEMLOG((long int)(&(vertices->Obter(j))), sizeof(Vertice), 0);
             }
         }
     }
-}
+};
 
 
-void MetodosOrdenacao::SelectionSort() {
+void MetodosOrdenacao::SelectionSort(int esq, int dir) {
     int i, j, min;
     for (i = 0; i < quantidadeVertices - 1; i++) {
         min = i;
@@ -36,6 +29,7 @@ void MetodosOrdenacao::SelectionSort() {
         vertices->inverterItens(i, min);
     }
 };
+
 
 void MetodosOrdenacao::InserctionSort() {
     int i, j;
@@ -52,7 +46,9 @@ void MetodosOrdenacao::InserctionSort() {
     }
 };
 
-void MetodosOrdenacao::MergeSort(ListaEncadeada<Vertice*>* vertices, int esq, int dir) {
+
+
+ void MetodosOrdenacao::MergeSort(ListaEncadeada<Vertice*>* vertices, int esq, int dir) {
 	 int meio;
 
      if (esq < dir) {
@@ -178,7 +174,7 @@ void MetodosOrdenacao::Heapify(ListaEncadeada<Vertice*>* vertices, int n, int ra
     }
 }
 
-void MetodosOrdenacao::HeapSort() {
+void MetodosOrdenacao::HeapSort(ListaEncadeada<Vertice*>* vertices) {
     int n = vertices->Tamanho();
     int numComparacoes = 0;
 
@@ -192,3 +188,24 @@ void MetodosOrdenacao::HeapSort() {
     }
 }
 
+
+void MetodosOrdenacao::OrdenacaoEficiente() {
+    EscolherOrdenacao(0, vertices->Tamanho() - 1);
+}
+
+void MetodosOrdenacao::EscolherOrdenacao(int esq, int dir) {
+    int i, j;
+    Particao(esq, dir, &i, &j, vertices);
+
+    if (j - esq < 0) {
+        SelectionSort(esq, j);
+    } else {
+        Ordena(esq, j, vertices);
+    }
+
+    if (dir - i > 10) {
+        SelectionSort(i, dir);
+    } else {
+        Ordena(i, dir, vertices);
+    }
+}
