@@ -2,12 +2,9 @@
 #include "Grafo.hpp"
 #include "MetodosOrdenacao.hpp"
 #include "EhGuloso.hpp"
-#include <matplotlibcpp.h>
 
 #define SUCCESSO (0)
 #define FALHA (1)
-
-namespace plt = matplotlibcpp;
 
 int main(int argc, char const *argv[]) {
     char metodoOrdenacao;
@@ -48,55 +45,33 @@ int main(int argc, char const *argv[]) {
     std::string resultado;
     bool verticesGulosos = EhGuloso.VerticesGulosos();
 
-    std::vector<int> tamanhosDeEntrada;
-    std::vector<double> temposDeExecucao;
-
     // Medir o tempo de execução do método de ordenação
     auto start = std::chrono::high_resolution_clock::now();
 
     switch (metodoOrdenacao) {
         case 'b':
-            
-                MetodosOrdenacao.BubbleSort();
-                
+            MetodosOrdenacao.BubbleSort();
             break;
         case 's':
-            
-                MetodosOrdenacao.SelectionSort(0, numVertices-1);
-                
+            MetodosOrdenacao.SelectionSort(0, numVertices-1);
+            std::cout << EhGuloso.VerificarColoracao() << std::endl;
             break;
-
         case 'i':
-           
-                MetodosOrdenacao.InserctionSort();
-                
+            MetodosOrdenacao.InserctionSort();
             break;
-
         case 'q':
+            MetodosOrdenacao.QuickSort();
            
-                MetodosOrdenacao.QuickSort();
-                
-            
             break;
-
         case 'm':
-            
-                MetodosOrdenacao.MergeSort(vertices, 0, numVertices - 1);
-               
-            
+            MetodosOrdenacao.MergeSort(vertices, 0, numVertices - 1);
             break;
-
         case 'y':
-            
-                MetodosOrdenacao.OrdenacaoEficiente();
-               
+            MetodosOrdenacao.OrdenacaoEficiente();
+            std::cout << EhGuloso.VerificarColoracao() << std::endl;
             break;
-
         case 'p':
-            
-                MetodosOrdenacao.HeapSort(vertices);
-               
-           
+            MetodosOrdenacao.HeapSort(vertices);
             break;
         default:
             std::cerr << "Método de ordenação inválido." << std::endl;
@@ -107,16 +82,6 @@ int main(int argc, char const *argv[]) {
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
     double tempoEmSegundos = duration / 1000000.0;
 
-    // Adicione o tamanho da entrada e o tempo de execução aos vetores
-    tamanhosDeEntrada.push_back(numVertices);
-    temposDeExecucao.push_back(tempoEmSegundos);
-
-    // Plote os gráficos
-    plt::plot(tamanhosDeEntrada, temposDeExecucao, "bo-");
-    plt::xlabel("Tamanho da Entrada");
-    plt::ylabel("Tempo de Execução (segundos)");
-    plt::show();
-
-    std::cout << resultado << std::endl;
+    std::cout << "fim" << std::endl;
     return SUCCESSO;
 }
