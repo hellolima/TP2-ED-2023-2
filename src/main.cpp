@@ -57,7 +57,7 @@ int main(int argc, char const *argv[]) {
 
         case 's':
             if (verticesGulosos) {
-                MetodosOrdenacao.SelectionSort();
+                MetodosOrdenacao.SelectionSort(0, numVertices-1);
                 resultado = EhGuloso.VerificarColoracao();
             } else {
                 resultado = "0";
@@ -92,6 +92,14 @@ int main(int argc, char const *argv[]) {
             break;
 
         case 'p':
+            if (verticesGulosos) {
+                MetodosOrdenacao.OrdenacaoEficiente();
+                resultado = EhGuloso.VerificarColoracao();
+            } else {
+                resultado = "0";
+            }
+            break;
+
         case 'y':
             if (verticesGulosos) {
                 MetodosOrdenacao.HeapSort(vertices);
